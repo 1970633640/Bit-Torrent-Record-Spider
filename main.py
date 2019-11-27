@@ -35,13 +35,15 @@ def getIP(ip):
 file1 = open("ip.csv", "a", encoding="utf-8")
 file2 = open("download.csv", "a", encoding="utf-8")
 
-CIDRs=['1.2.3.4/24']
+CIDRs=['218.104.71.160/28','	210.72.22.0/24']
 for CIDR in CIDRs:
+    mask=int(CIDR.split('/')[1])
     ip_cidr=IPNetwork(CIDR)
-    for ip in ip_cidr.subnet(24):
+    for ip in ip_cidr.subnet(max(24,mask)):
         print(ip[0])
         ips=getIP(ip[0])
         for ip1 in ips:
-            getDownload(ip1,file1,file2)
+            if IPNetwork(ip1) in ip_cidr:
+                getDownload(ip1,file1,file2)
 file1.close()
 file2.close()
