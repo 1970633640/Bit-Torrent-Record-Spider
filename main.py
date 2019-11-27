@@ -35,7 +35,7 @@ def getIP(ip):
 file1 = open("ip.csv", "a", encoding="utf-8")
 file2 = open("download.csv", "a", encoding="utf-8")
 
-CIDRs=['218.104.71.160/28','	210.72.22.0/24']
+CIDRs=['8.8.8.8/28','1.2.3.4/24']
 for CIDR in CIDRs:
     mask=int(CIDR.split('/')[1])
     ip_cidr=IPNetwork(CIDR)
